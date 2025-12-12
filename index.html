@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Mindmap – Emilia und Philipp – „Tauben im Gras“</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      padding: 40px 10px;
+    }
+
+    .mindmap {
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 1200px;
+      width: 100%;
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(148, 163, 184, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mindmap::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.12), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(129, 140, 248, 0.18), transparent 55%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    h1 {
+      position: relative;
+      text-align: center;
+      font-size: 1.6rem;
+      margin: 0 0 26px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e0f2fe;
+    }
+
+    h2 {
+      position: relative;
+      text-align: center;
+      font-size: 0.9rem;
+      margin: 0 0 32px;
+      font-weight: 400;
+      color: #9ca3af;
+    }
+
+    .center-node {
+      position: relative;
+      margin: 0 auto 36px;
+      width: 320px;
+      padding: 18px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(129, 140, 248, 0.35));
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      text-align: center;
+      color: #e5f0ff;
+      box-shadow:
+        0 0 25px rgba(129, 140, 248, 0.8),
+        0 12px 35px rgba(15, 23, 42, 0.9);
+    }
+
+    .center-node-title {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .center-node-question {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px 26px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .branch {
+      position: relative;
+      padding: 16px 16px 16px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.55));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(18px);
+    }
+
+    .branch-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #bae6fd;
+      margin-bottom: 8px;
+    }
+
+    .branch-subtitle {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 5px;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #38bdf8 0, #4f46e5 70%);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.85);
+    }
+
+    .branch-theme {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .conclusion {
+      position: relative;
+      margin-top: 26px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+    }
+
+    .conclusion-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bfdbfe;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .conclusion ul li {
+      color: #e5f0ff;
+    }
+  </style>
+</head>
+<body>
+  <main class="mindmap">
+    <h1>Tauben im Gras – Emilia &amp; Philipp</h1>
+    <h2>Beziehungsanalyse: Scheitert sie an mangelnder Kommunikation?</h2>
+
+    <section class="center-node">
+      <div class="center-node-title">ZENTRALE FRAGE</div>
+      <div class="center-node-question">
+        Scheitert die Beziehung von Emilia und Philipp vor allem an mangelnder Kommunikation?
+      </div>
+    </section>
+
+    <section class="grid">
+
+      <!-- 1. Kommunikationsprobleme als Hauptursache (Pro-These) -->
+      <article class="branch">
+        <div class="branch-theme">Aspekt</div>
+        <div class="branch-title">Kommunikationsdefizite als Kernproblem</div>
+        <div class="branch-subtitle">Argumente dafür, dass fehlende Gespräche die Beziehung untergraben</div>
+        <ul>
+          <li>unausgesprochene Erwartungen zwischen beiden</li>
+          <li>fehlende offene Gespräche über Zukunft (z. B. Kinder, Alltag, finanzielle Sicherheit)</li>
+          <li>Missverständnisse werden nicht aktiv geklärt</li>
+          <li>innere Monologe ersetzen Dialoge – Gedanken bleiben im Kopf</li>
+          <li>Emilia formuliert Bedürfnisse eher indirekt, nicht konfrontativ</li>
+          <li>Philipp weicht Konfliktgesprächen aus, flüchtet in Arbeit / Alltag</li>
+          <li>Oberflächliche Alltagskommunikation statt emotionaler Tiefe</li>
+          <li>Gefühle von Enttäuschung und Verletzung bleiben unausgesprochen</li>
+        </ul>
+      </article>
+
+      <!-- 2. Innere Distanz und psychische Faktoren -->
+      <article class="branch">
+        <div class="branch-theme">Aspekt</div>
+        <div class="branch-title">Innere Distanz und Unsicherheit</div>
+        <div class="branch-subtitle">Wie psychische und emotionale Faktoren das Sprechen verhindern</div>
+        <ul>
+          <li>Emilia fühlt sich emotional nicht gesehen, zieht sich innerlich zurück</li>
+          <li>Angst vor Zurückweisung hält beide davon ab, ehrlich zu sein</li>
+          <li>Scham über eigene Wünsche (z. B. Anerkennung, Sicherheit)</li>
+          <li>Philipp wirkt zerrissen zwischen Verpflichtungen und eigener Überforderung</li>
+          <li>innere Vereinsamung trotz räumlicher Nähe</li>
+          <li>Gefühl, vom anderen „nicht wirklich verstanden“ zu werden</li>
+          <li>Sprachlosigkeit als Ausdruck tiefer Verunsicherung</li>
+        </ul>
+      </article>
+
+      <!-- 3. Gesellschaftlicher Kontext / Nachkriegszeit -->
+      <article class="branch">
+        <div class="branch-theme">Kontext</div>
+        <div class="branch-title">Nachkriegszeit und Gesellschaftsdruck</div>
+        <div class="branch-subtitle">Rahmenbedingungen, die Kommunikation zusätzlich erschweren</div>
+        <ul>
+          <li>Nachkriegs-Atmosphäre: Orientierungslosigkeit, materielle Unsicherheit</li>
+          <li>gesellschaftliche Erwartungen an Rollenbilder (Mann als Versorger, Frau als abhängige Partnerin)</li>
+          <li>Tabuisierung bestimmter Themen (Vergangenheit, Traumata, Schuld)</li>
+          <li>allgemeine Sprachlosigkeit der Nachkriegsgesellschaft spiegelt sich in der Beziehung</li>
+          <li>fehlende Vorbilder für gleichberechtigte, offene Kommunikation</li>
+          <li>äußerer Druck verstärkt inneren Rückzug und Streitpotenzial</li>
+        </ul>
+      </article>
+
+      <!-- 4. Persönliche Defizite / Charakterzüge -->
+      <article class="branch">
+        <div class="branch-theme">Figuren</div>
+        <div class="branch-title">Charakter und individuelle Schwächen</div>
+        <div class="branch-subtitle">Wo die Figuren selbst zum Scheitern beitragen</div>
+        <ul>
+          <li>Philipp wirkt oft passiv, vermeidet klare Entscheidungen</li>
+          <li>Tendenz zum Ausweichen statt zum direkten Gespräch</li>
+          <li>Emilia neigt zur Idealisierung, erwartet „mehr“ ohne es klar zu benennen</li>
+          <li>beide sind stärker mit sich selbst als mit dem Gegenüber beschäftigt</li>
+          <li>fehlende Kompromissbereitschaft in zentralen Fragen</li>
+          <li>mangelnde Fähigkeit zur Selbstreflexion und zur Selbstkritik</li>
+        </ul>
+      </article>
+
+      <!-- 5. Weitere Ursachen neben Kommunikation -->
+      <article class="branch">
+        <div class="branch-theme">Gegenaspekt</div>
+        <div class="branch-title">Mehr als nur Kommunikation</div>
+        <div class="branch-subtitle">Argumente dagegen, dass nur Kommunikation verantwortlich ist</div>
+        <ul>
+          <li>strukturelle Probleme der Beziehung (Machtgefälle, Abhängigkeiten)</li>
+          <li>ökonomische Unsicherheit beeinflusst die Beziehung massiv</li>
+          <li>unvereinbare Zukunftsvorstellungen – auch bei guter Kommunikation schwer lösbar</li>
+          <li>gesellschaftliche und historische Brüche überfordern beide</li>
+          <li>fehlende stabile Identität der Figuren – sie wissen selbst nicht, was sie wollen</li>
+          <li>Menschenbild des Romans: Vereinzelung, Fragmentierung, Zerfall von Beziehungen generell</li>
+        </ul>
+      </article>
+
+      <!-- 6. Literarische Gestaltung / Erzähltechnik -->
+      <article class="branch">
+        <div class="branch-theme">Erzähltechnik</div>
+        <div class="branch-title">Montage und Sprachlosigkeit</div>
+        <div class="branch-subtitle">Wie Koeppens Technik die Kommunikationsprobleme spiegelt</div>
+        <ul>
+          <li>Montageroman: zersplitterte Perspektiven, viele Figuren, wenig geschlossene Dialoge</li>
+          <li>innere Monologe dominieren, direkte Gespräche treten in den Hintergrund</li>
+          <li>Brüche in der Erzählführung spiegeln innere Zerrissenheit</li>
+          <li>Sprachlosigkeit der Figuren wird formal nachgebildet</li>
+          <li>fehlende lineare Entwicklung: auch die Beziehung wirkt haltlos, ungerichtet</li>
+          <li>Kommunikationsscheitern als Teil des Gesamtbildes einer zerfallenden Gesellschaft</li>
+        </ul>
+      </article>
+
+    </section>
+
+    <!-- Fazit / Einordnung -->
+    <section class="conclusion">
+      <div class="conclusion-title">FAZIT – DIFFERENZIERTE EINORDNUNG</div>
+      <ul>
+        <li>mangelnde Kommunikation ist ein zentraler Faktor für das Scheitern der Beziehung</li>
+        <li>Kommunikationsprobleme verknüpfen sich mit innerer Unsicherheit, gesellschaftlichem Druck und persönlichen Defiziten</li>
+        <li>die Beziehung scheitert nicht ausschließlich an Kommunikation, sondern an einem Bündel von Ursachen</li>
+        <li>Kommunikationsmangel wirkt jedoch als Verstärker aller anderen Konflikte und macht mögliche Lösungen unsichtbar</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
