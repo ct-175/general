@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>British Empire Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        margin: 0;
+        padding: 20px;
+        color: #222;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .question-block {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .question-block img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+
+    button {
+        background: #222;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background: #444;
+    }
+
+    #result {
+        margin-top: 30px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>British Empire Quiz</h1>
+
+<div class="quiz-container">
+
+    <!-- QUESTION 1 -->
+    <div class="question-block">
+        <h3>1. What year was the British East India Company founded?</h3>
+        <img src="IMAGE_HERE" alt="East India Company">
+        <label><input type="radio" name="q1" value="0"> 1588</label><br>
+        <label><input type="radio" name="q1" value="1"> 1600</label><br>
+        <label><input type="radio" name="q1" value="0"> 1620</label><br>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question-block">
+        <h3>2. Which colony did Britain take from Spain in 1655?</h3>
+        <img src="IMAGE_HERE" alt="Caribbean map">
+        <label><input type="radio" name="q2" value="1"> Jamaica</label><br>
+        <label><input type="radio" name="q2" value="0"> Barbados</label><br>
+        <label><input type="radio" name="q2" value="0"> Bermuda</label><br>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="question-block">
+        <h3>3. What was the main cash crop produced on Caribbean plantations?</h3>
+        <img src="IMAGE_HERE" alt="Sugar plantation">
+        <label><input type="radio" name="q3" value="1"> Sugar</label><br>
+        <label><input type="radio" name="q3" value="0"> Cotton</label><br>
+        <label><input type="radio" name="q3" value="0"> Tobacco</label><br>
+    </div>
+
+    <!-- QUESTION 4 -->
+    <div class="question-block">
+        <h3>4. Which event marked the beginning of direct British rule in India?</h3>
+        <img src="IMAGE_HERE" alt="Indian Mutiny">
+        <label><input type="radio" name="q4" value="0"> Battle of Plassey</label><br>
+        <label><input type="radio" name="q4" value="1"> Indian Mutiny (1857)</label><br>
+        <label><input type="radio" name="q4" value="0"> Gandhi's Salt March</label><br>
+    </div>
+
+    <!-- QUESTION 5 -->
+    <div class="question-block">
+        <h3>5. What is a dominion?</h3>
+        <img src="IMAGE_HERE" alt="Dominion map">
+        <label><input type="radio" name="q5" value="1"> A self-governing colony under the British monarch</label><br>
+        <label><input type="radio" name="q5" value="0"> A military outpost</label><br>
+        <label><input type="radio" name="q5" value="0"> A trading company</label><br>
+    </div>
+
+    <!-- QUESTION 6 -->
+    <div class="question-block">
+        <h3>6. Which leader promoted non-violent resistance in India?</h3>
+        <img src="IMAGE_HERE" alt="Gandhi">
+        <label><input type="radio" name="q6" value="1"> Mahatma Gandhi</label><br>
+        <label><input type="radio" name="q6" value="0"> Jawaharlal Nehru</label><br>
+        <label><input type="radio" name="q6" value="0"> Subhas Chandra Bose</label><br>
+    </div>
+
+    <!-- QUESTION 7 -->
+    <div class="question-block">
+        <h3>7. When did India gain independence?</h3>
+        <img src="IMAGE_HERE" alt="Indian independence">
+        <label><input type="radio" name="q7" value="1"> 1947</label><br>
+        <label><input type="radio" name="q7" value="0"> 1939</label><br>
+        <label><input type="radio" name="q7" value="0"> 1955</label><br>
+    </div>
+
+    <!-- QUESTION 8 -->
+    <div class="question-block">
+        <h3>8. What was Britain's goal during the Scramble for Africa?</h3>
+        <img src="IMAGE_HERE" alt="Africa map">
+        <label><input type="radio" name="q8" value="1"> Control from Cairo to Cape Town</label><br>
+        <label><input type="radio" name="q8" value="0"> Control the Sahara Desert</label><br>
+        <label><input type="radio" name="q8" value="0"> Build trading posts only</label><br>
+    </div>
+
+    <!-- QUESTION 9 -->
+    <div class="question-block">
+        <h3>9. Which territory was handed back to China in 1997?</h3>
+        <img src="IMAGE_HERE" alt="Hong Kong skyline">
+        <label><input type="radio" name="q9" value="1"> Hong Kong</label><br>
+        <label><input type="radio" name="q9" value="0"> Singapore</label><br>
+        <label><input type="radio" name="q9" value="0"> Macau</label><br>
+    </div>
+
+    <!-- QUESTION 10 -->
+    <div class="question-block">
+        <h3>10. What remains today of the British Empire?</h3>
+        <img src="IMAGE_HERE" alt="Commonwealth logo">
+        <label><input type="radio" name="q10" value="1"> The Commonwealth</label><br>
+        <label><input type="radio" name="q10" value="0"> The East India Company</label><br>
+        <label><input type="radio" name="q10" value="0"> The British Raj</label><br>
+    </div>
+
+    <button onclick="checkQuiz()">Check Answers</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+function checkQuiz() {
+    let score = 0;
+    for (let i = 1; i <= 10; i++) {
+        const answer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (answer && answer.value === "1") score++;
+    }
+    document.getElementById("result").innerText =
+        `You scored ${score} out of 10`;
+}
+</script>
+
+</body>
+</html>
