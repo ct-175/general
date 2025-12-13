@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>History of the United Kingdom (1600–1997)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* ========== RESET ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* ========== BACKGROUND ========== */
+    .background {
+      position: fixed;
+      inset: 0;
+      background: url("assets/uk-flag.png") center/cover no-repeat;
+      filter: brightness(0.7) blur(4px);
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    /* ========== SLIDES ========== */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      opacity: 0;
+      transform: translateY(40px) scale(0.97);
+      transition:
+        opacity 380ms ease,
+        transform 380ms ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* ========== CARD / LIQUID GLASS ========== */
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      padding: 30px 38px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px) saturate(1.15);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    .section-label {
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 3.2vw, 38px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(22px, 2.2vw, 26px);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 1.7vw, 20px);
+      opacity: 0.9;
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: clamp(17px, 1.5vw, 19px);
+      line-height: 1.6;
+      opacity: 0.96;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    li {
+      font-size: clamp(16px, 1.4vw, 18px);
+      line-height: 1.5;
+      margin-bottom: 6px;
+      opacity: 0.96;
+    }
+
+    li strong {
+      font-weight: 600;
+    }
+
+    .key-message {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      font-size: clamp(16px, 1.4vw, 18px);
+      opacity: 0.95;
+    }
+
+    /* ========== LAYOUT ========== */
+    .two-cols {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 12px;
+    }
+
+    .col {
+      min-width: 0;
+    }
+
+    /* ========== NAVIGATION ========== */
+    .nav {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 20;
+    }
+
+    .nav-indicator {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-right: 6px;
+    }
+
+    .nav button {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition:
+        background 140ms ease,
+        transform 140ms ease,
+        border-color 140ms ease,
+        opacity 140ms ease;
+    }
+
+    .nav button:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .nav button:disabled {
+      opacity: 0.4;
+      cursor: default;
+      transform: none;
+    }
+
+    /* ========== PROGRESS BAR ========== */
+    .progress {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      width: min(380px, 82vw);
+      height: 4px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      overflow: hidden;
+      z-index: 20;
+    }
+
+    .progress-inner {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffffff, #b8e1ff);
+      transition: width 260ms ease;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .card {
+        padding: 20px 18px;
+        border-radius: 20px;
+      }
+
+      .two-cols {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav {
+        bottom: 16px;
+        right: 16px;
+      }
+
+      .progress {
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background"></div>
+  <div class="overlay"></div>
+
+  <!-- ========== SLIDE 0 – TITLE ========== -->
+  <section class="slide active" data-index="0">
+    <div class="card">
+      <div class="section-label">History of the United Kingdom</div>
+      <h1>The History of the United Kingdom (1600–1997)</h1>
+      <p class="subtitle">
+        From early trading companies to the end of the British Empire.
+      </p>
+      <p>
+        This presentation follows the development of British power from the first overseas companies and colonies
+        around 1600 to the symbolic end of the Empire in 1997.
+      </p>
+      <p class="key-message">
+        Guiding question: <strong>How did the UK build, expand and finally lose its global empire?</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 1 – OVERVIEW ========== -->
+  <section class="slide" data-index="1">
+    <div class="card">
+      <div class="section-label">Overview</div>
+      <h1>Structure of this presentation</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Main phases</h2>
+          <ul>
+            <li><strong>1600–1700:</strong> first companies and colonies.</li>
+            <li><strong>1700–1800:</strong> India, America and global expansion.</li>
+            <li><strong>1800–1900:</strong> abolition, dominions, Scramble for Africa.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>20th century</h2>
+          <ul>
+            <li><strong>1900–1948:</strong> nationalism and the road to independence.</li>
+            <li><strong>1960s–1970s:</strong> African and Caribbean independence.</li>
+            <li><strong>1997:</strong> Hong Kong and the end of the colonial era.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        All key events are taken directly from the textbook timeline and grouped into <strong>clear historical phases.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 2 – 1600–1620 ========== -->
+  <section class="slide" data-index="2">
+    <div class="card">
+      <div class="section-label">Early expansion</div>
+      <h1>1600–1620: First steps of British expansion</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Companies and settlements</h2>
+          <ul>
+            <li><strong>1600:</strong> The British East India Company is established.</li>
+            <li><strong>1607:</strong> Jamestown, Virginia becomes the first permanent British settlement in the Americas.</li>
+            <li><strong>1620s:</strong> The first British colonies in the Caribbean are founded.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Why this matters</h2>
+          <ul>
+            <li><strong>Shift to overseas trade:</strong> Britain turns to global commerce and colonies.</li>
+            <li><strong>Strategic locations:</strong> America and the Caribbean become key regions for resources and trade.</li>
+            <li><strong>Long‑term impact:</strong> these early foundations grow into a worldwide empire.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        Around 1600, Britain begins to move from a European kingdom to a <strong>global trading power.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 3 – CARIBBEAN & ATLANTIC ========== -->
+  <section class="slide" data-index="3">
+    <div class="card">
+      <div class="section-label">Caribbean and Atlantic</div>
+      <h1>1655–1670: Caribbean and Atlantic expansion</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Key events</h2>
+          <ul>
+            <li><strong>1655:</strong> The British invade Jamaica, previously a colony of Spain.</li>
+            <li><strong>1661:</strong> First permanent British settlement in Africa at James Island, a key slave trade post.</li>
+            <li><strong>1664:</strong> The English take over New Netherland, including New Amsterdam, renamed <strong>New York</strong>.</li>
+            <li><strong>1666:</strong> First British colonies on the Bahamas.</li>
+            <li><strong>1670:</strong> Jamaica officially becomes a British colony.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Background and impact</h2>
+          <ul>
+            <li><strong>Sugar and slavery:</strong> Caribbean colonies become centres of plantation economies.</li>
+            <li><strong>Slave trade:</strong> James Island links Britain directly to the transatlantic slave trade.</li>
+            <li><strong>Strategic power:</strong> control of islands and ports strengthens British naval and commercial power.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        By 1670, Britain has built a <strong>network of colonies</strong> across America, the Caribbean and Africa.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 4 – INDIA & AMERICA ========== -->
+  <section class="slide" data-index="4">
+    <div class="card">
+      <div class="section-label">India and America</div>
+      <h1>1757–1787: India becomes central, America is lost</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>India: Battle of Plassey (1757)</h2>
+          <ul>
+            <li><strong>Robert Clive</strong> defeats the ruler of Bengal.</li>
+            <li>The East India Company gains control over Bengal’s wealth and administration.</li>
+            <li>India becomes the most important region for British trade and profit.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>America and Australia</h2>
+          <ul>
+            <li><strong>1775–1783:</strong> American War of Independence, Britain recognises the USA as independent.</li>
+            <li><strong>1787:</strong> First shipment of transported prisoners from the UK to Australia.</li>
+            <li>Australia becomes a new settler colony after the loss of the American colonies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        Britain loses the American colonies but strengthens its position in <strong>India and the Pacific.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 5 – ABOLITION ========== -->
+  <section class="slide" data-index="5">
+    <div class="card">
+      <div class="section-label">Reform and abolition</div>
+      <h1>1807–1833: Ending the slave trade and slavery</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Legal steps</h2>
+          <ul>
+            <li><strong>1807:</strong> Shipment of slaves in British ships or to British colonies is prohibited.</li>
+            <li><strong>1833:</strong> Slavery is abolished throughout the British Empire.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Meaning and limits</h2>
+          <ul>
+            <li><strong>Humanitarian change:</strong> reflects growing anti‑slavery movements in Britain.</li>
+            <li><strong>Economic shift:</strong> the Empire moves towards wage labour and new forms of control.</li>
+            <li><strong>Legacy:</strong> slavery ends, but racial inequality and colonial structures continue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        Abolition marks a moral turning point, but does not end <strong>exploitation or empire.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 6 – NZ & INDIAN MUTINY ========== -->
+  <section class="slide" data-index="6">
+    <div class="card">
+      <div class="section-label">Mid-19th century</div>
+      <h1>1840–1859: New Zealand and the Indian Mutiny</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>New Zealand (1840)</h2>
+          <ul>
+            <li><strong>1840:</strong> New Zealand officially becomes British.</li>
+            <li>Settler colonies grow in the Pacific.</li>
+            <li>Maori land and rights come under pressure.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Indian Mutiny (1857–1859)</h2>
+          <ul>
+            <li>First large‑scale, but unsuccessful rebellion by Indians against British rulers.</li>
+            <li>Triggered by military and cultural tensions.</li>
+            <li>Result: the British Crown takes direct control over India from the Company.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        Mid‑19th century: the Empire grows, but resistance shows the <strong>limits of British rule.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 7 – DOMINION & EMPRESS ========== -->
+  <section class="slide" data-index="7">
+    <div class="card">
+      <div class="section-label">High Empire</div>
+      <h1>1867–1876: Dominions and the “Empress of India”</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Dominion status</h2>
+          <ul>
+            <li><strong>1867:</strong> Canada is given <em>dominion</em> (self‑governing) status.</li>
+            <li>Dominions are largely self‑governing but stay within the Empire.</li>
+            <li>They keep ties to Britain in defence and foreign policy.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Empress of India (1876)</h2>
+          <ul>
+            <li><strong>1876:</strong> Queen Victoria takes the title “Empress of India”.</li>
+            <li>Symbol of Britain’s imperial pride and power.</li>
+            <li>Shows how central India has become to the Empire.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        By the late 19th century, the British Empire reaches a <strong>symbolic and territorial peak.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 8 – SCRAMBLE FOR AFRICA ========== -->
+  <section class="slide" data-index="8">
+    <div class="card">
+      <div class="section-label">Imperialism</div>
+      <h1>1881–1919: The “Scramble for Africa”</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>African expansion</h2>
+          <ul>
+            <li><strong>1881–1919:</strong> Britain and other European colonial powers divide Africa.</li>
+            <li>Britain aims for control “from Cairo to Cape Town”.</li>
+            <li>New colonies are created without regard for African borders or peoples.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Consequences</h2>
+          <ul>
+            <li><strong>Exploitation:</strong> land and resources are taken for European benefit.</li>
+            <li><strong>Artificial borders:</strong> contribute to later conflicts.</li>
+            <li>African societies face political control and economic dependency.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        The Scramble for Africa represents the <strong>height of European imperialism</strong> and its long‑lasting problems.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 9 – DOMINIONS & GANDHI ========== -->
+  <section class="slide" data-index="9">
+    <div class="card">
+      <div class="section-label">Early 20th century</div>
+      <h1>1901–1920: Dominions and Gandhi</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>More dominions</h2>
+          <ul>
+            <li><strong>1901 & 1907:</strong> Australia and New Zealand are given dominion status.</li>
+            <li>These dominions are self‑governing but remain loyal to the British Crown.</li>
+            <li>They show a shift from direct control to partnerships within the Empire.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Gandhi and Indian nationalism</h2>
+          <ul>
+            <li><strong>1920:</strong> Mahatma Gandhi becomes a leading member of the Indian National Congress.</li>
+            <li>He promotes non‑violent resistance against British rule.</li>
+            <li>India’s struggle becomes central to the future of the Empire.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        At the same time as some colonies gain more autonomy, <strong>India demands real independence.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 10 – COMMONWEALTH & INDEPENDENCE ========== -->
+  <section class="slide" data-index="10">
+    <div class="card">
+      <div class="section-label">Between empires</div>
+      <h1>1926–1948: Commonwealth and independence</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Commonwealth of Nations</h2>
+          <ul>
+            <li><strong>1926:</strong> Balfour Declaration creates the British Commonwealth of Nations.</li>
+            <li>Dominions are recognised as equal in status to Britain.</li>
+            <li>Empire starts to change into a voluntary association.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Independence and separation</h2>
+          <ul>
+            <li><strong>1947:</strong> Indian Independence Act is proclaimed.</li>
+            <li><strong>1948:</strong> Republic of Ireland Act is signed, ending British monarchy in Ireland.</li>
+            <li>Key parts of the Empire leave British control and become independent states.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        After World War II, the British Empire begins to turn into a
+        <strong>Commonwealth of independent nations.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 11 – AFRICA & CARIBBEAN ========== -->
+  <section class="slide" data-index="11">
+    <div class="card">
+      <div class="section-label">Decolonisation</div>
+      <h1>1960s–1970s: African and Caribbean independence</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>Independence wave</h2>
+          <ul>
+            <li><strong>1960s–1970s:</strong> most of Britain’s African and Caribbean colonies achieve independence.</li>
+            <li>New states are created across Africa and the Caribbean.</li>
+            <li>Many join the Commonwealth as equal members.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>End of formal empire</h2>
+          <ul>
+            <li>Britain’s direct political control over overseas territories almost disappears.</li>
+            <li>Economic and cultural influence, however, often remains strong.</li>
+            <li>The UK moves from empire to a post‑colonial role in world politics.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        By the 1970s, the British Empire has largely ended – but its
+        <strong>legacies continue worldwide.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 12 – HONG KONG ========== -->
+  <section class="slide" data-index="12">
+    <div class="card">
+      <div class="section-label">End of the colonial era</div>
+      <h1>1997: Hong Kong is handed back to China</h1>
+
+      <div class="two-cols">
+        <div class="col">
+          <h2>The event</h2>
+          <ul>
+            <li><strong>1997:</strong> Hong Kong, a former British colony, is handed back to China.</li>
+            <li>It had been under British rule since the 19th century.</li>
+            <li>The handover follows an agreement between Britain and China.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h2>Symbolic meaning</h2>
+          <ul>
+            <li>Seen as the <strong>symbolic end</strong> of the British Empire.</li>
+            <li>Shows the final loss of major overseas colonial possessions.</li>
+            <li>Marks a new era of British foreign policy without classic colonies.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="key-message">
+        The 1997 handover of Hong Kong closes a chapter that began with
+        <strong>companies and colonies around 1600.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 13 – SUMMARY ========== -->
+  <section class="slide" data-index="13">
+    <div class="card">
+      <div class="section-label">Summary</div>
+      <h1>From trading company to post‑colonial state</h1>
+
+      <ul>
+        <li><strong>1600–1700:</strong> early companies and colonies in America, the Caribbean and Africa.</li>
+        <li><strong>1700–1800:</strong> India becomes central; America is lost but the Empire grows elsewhere.</li>
+        <li><strong>1800–1900:</strong> abolition of slavery, dominions, Scramble for Africa.</li>
+        <li><strong>1900–1948:</strong> dominions gain autonomy, Gandhi leads India to independence.</li>
+        <li><strong>1960s–1970s:</strong> African and Caribbean colonies become independent.</li>
+        <li><strong>1997:</strong> Hong Kong handover marks the end of formal empire.</li>
+      </ul>
+
+      <p class="key-message">
+        The history of the UK from 1600 to 1997 is a story of
+        <strong>expansion, domination, resistance and transformation.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== SLIDE 14 – CONCLUSION ========== -->
+  <section class="slide" data-index="14">
+    <div class="card">
+      <div class="section-label">Conclusion</div>
+      <h1>What remains today</h1>
+
+      <p>
+        Even though the British Empire no longer exists, its impact can still be seen in language, politics,
+        borders and economic relationships around the world. Many former colonies are part of the Commonwealth, and
+        debates about colonialism and its consequences continue.
+      </p>
+      <p>
+        Understanding this history helps explain why the United Kingdom plays a special role in global politics and
+        why questions of <strong>responsibility, memory and identity</strong> are still important today.
+      </p>
+      <p class="key-message">
+        The end of the Empire did not end its influence – it changed the form in which it is felt.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== NAVIGATION & PROGRESS ========== -->
+  <div class="nav">
+    <span class="nav-indicator" id="navIndicator">1 / 15</span>
+    <button id="prevBtn" aria-label="Previous slide">&larr;</button>
+    <button id="nextBtn" aria-label="Next slide">&rarr;</button>
+  </div>
+
+  <div class="progress">
+    <div class="progress-inner" id="progressInner"></div>
+  </div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const navIndicator = document.getElementById("navIndicator");
+    const progressInner = document.getElementById("progressInner");
+
+    let index = 0;
+    const total = slides.length;
+
+    function updateSlides() {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+
+      prevBtn.disabled = index === 0;
+      nextBtn.disabled = index === total - 1;
+
+      navIndicator.textContent = `${index + 1} / ${total}`;
+      const progress = ((index + 1) / total) * 100;
+      progressInner.style.width = progress + "%";
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (index > 0) {
+        index--;
+        updateSlides();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (index < total - 1) {
+        index++;
+        updateSlides();
+      }
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") {
+        nextBtn.click();
+      } else if (e.key === "ArrowLeft") {
+        prevBtn.click();
+      }
+    });
+
+    updateSlides();
+  </script>
+</body>
+</html>
