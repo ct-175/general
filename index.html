@@ -1,45 +1,324 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="utf-8">
-  <title>Fair Trade — A Type of Development Aid</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fair Trade als Entwicklungsförderung — Präsentation</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width:900px; margin:2rem auto; }
-    section { border-bottom:1px solid #ddd; padding:1rem 0; }
-    h1,h2 { color:#0b5; }
-    p { margin:0.5rem 0; }
-    .note { font-size:0.9rem; color:#555; }
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#2dd4bf;
+      --muted:#94a3b8;
+      --text:#e6eef6;
+      --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+      --slide-padding:48px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.6);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#071025 0%, #071827 60%);color:var(--text);}
+    .deck{max-width:var(--maxw);margin:32px auto;padding:16px;display:grid;gap:18px}
+    .slide{
+      background:linear-gradient(180deg,var(--card), rgba(11,18,32,0.9));
+      border-radius:12px;padding:var(--slide-padding);
+      box-shadow:var(--shadow);position:relative;overflow:hidden;
+      min-height:420px;display:flex;flex-direction:column;justify-content:flex-start;
+    }
+    header.slide-head{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+    .logo{
+      width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#60a5fa);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#042;box-shadow:0 6px 18px rgba(45,212,191,0.12);
+    }
+    h1{font-size:1.6rem;margin:0;color:var(--accent)}
+    h2{font-size:1.15rem;margin:6px 0 12px;color:#c8f7ee}
+    p{margin:8px 0;color:var(--text);line-height:1.45}
+    ul{margin:8px 0 0 1.1rem;color:var(--muted)}
+    li{margin:6px 0}
+    .meta{font-size:0.9rem;color:var(--muted)}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+    .card{background:var(--glass);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .table{width:100%;border-collapse:collapse;margin-top:8px}
+    .table th{ text-align:left;padding:8px;color:var(--accent);font-weight:600}
+    .table td{padding:8px;color:var(--text);border-top:1px dashed rgba(255,255,255,0.03)}
+    footer{margin-top:auto;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:0.9rem}
+    .controls{display:flex;gap:8px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
+    .btn:focus{outline:2px solid rgba(45,212,191,0.18)}
+    /* Speaker notes (hidden by default) */
+    .notes{display:none;font-size:0.9rem;color:var(--muted);margin-top:12px}
+    /* Responsive */
+    @media (max-width:900px){
+      .two-col{grid-template-columns:1fr;gap:12px}
+      .deck{padding:8px}
+      .slide{padding:20px}
+    }
   </style>
 </head>
 <body>
-  <section id="title">
-    <h1>Fair Trade as Development Aid</h1>
-    <p class="note">Simple overview for classroom or GitHub Pages</p>
-  </section>
+  <main class="deck" id="deck">
+    <!-- Slide 1: Titel -->
+    <section class="slide" data-notes="Begrüßung, Vorstellung des Themas, Ziel der Präsentation: Fair Trade als eine Form von Entwicklungsförderung erklären und bewerten.">
+      <header class="slide-head">
+        <div class="logo">FT</div>
+        <div>
+          <h1>Fair Trade als Entwicklungsförderung</h1>
+          <div class="meta">Konzept, Wirkungen, Grenzen und Empfehlung — Ausführliche Präsentation</div>
+        </div>
+      </header>
 
-  <section id="description">
-    <h2>1. Description</h2>
-    <p>Fair trade is a **market-based aid approach**: certification, minimum prices, and social premiums paid by buyers to producer organizations (cooperatives). Typical actors: **certification bodies (e.g., Fairtrade), NGOs, ethical companies, and consumer markets**. Addressees are **smallholder farmers and worker communities** in low‑income countries.</p>
-  </section>
+      <p>Diese Präsentation erklärt Fair Trade als eine spezielle, marktorientierte Form der Entwicklungsförderung. Sie beleuchtet Aufbau, Akteure, Vor- und Nachteile, zeigt ein konkretes Beispiel und endet mit einer Empfehlung.</p>
 
-  <section id="advantages">
-    <h2>2. Advantages</h2>
-    <p>Benefits include **higher and more stable incomes**, community development funds (premiums), improved bargaining power, and incentives for sustainable practices. Profits go to **producers, cooperatives, and local communities**.</p>
-  </section>
+      <footer>
+        <div>Autor: Colin — Königsfeld i. Schwarzwald</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
 
-  <section id="disadvantages">
-    <h2>3. Disadvantages / Problems</h2>
-    <p>Challenges: certification costs, limited market access, risk of dependency on niche markets, and uneven benefits within communities. Some producers face **bureaucratic burdens** and may be excluded if they cannot meet standards.</p>
-  </section>
+    <!-- Slide 2: Definition -->
+    <section class="slide" data-notes="Definition präzise erklären: Zertifizierung, Mindestpreis, Social Premium, Marktmechanismus.">
+      <h2>1. Was ist Fair Trade? — Definition</h2>
+      <div class="two-col">
+        <div class="card">
+          <p><strong>Kerngedanke:</strong> Fair Trade ist ein marktbasiertes Instrument, das Produzentengruppen in Ländern des Globalen Südens durch Zertifizierung, Mindestpreise und soziale Prämien (Social Premium) bessere Handelsbedingungen verschafft.</p>
+          <ul>
+            <li>Mindestpreise schützen vor extremen Preisschwankungen.</li>
+            <li>Social Premium: zusätzliche Mittel für Gemeinschaftsprojekte.</li>
+            <li>Zertifizierungsstandards regeln Arbeitsbedingungen und Umweltpraktiken.</li>
+          </ul>
+        </div>
 
-  <section id="example">
-    <h2>4. Example</h2>
-    <p>Case studies from **coffee and cocoa cooperatives** show improved incomes and governance for certified groups, but mixed results where market access or internal governance is weak.</p>
-  </section>
+        <div class="card">
+          <p><strong>Akteure:</strong></p>
+          <ul>
+            <li>Zertifizierungsorganisationen (z. B. Fairtrade-Label, FLO).</li>
+            <li>NGOs, Händler, Importeure und ethische Marken.</li>
+            <li>Konsument*innen in Industrieländern als Nachfragetreiber.</li>
+            <li>Adressaten: Kleinbauern, Kooperativen, Plantagenarbeiter*innen.</li>
+          </ul>
+        </div>
+      </div>
 
-  <section id="conclusion">
-    <h2>5. Conclusion & Recommendation</h2>
-    <p>Recommendation: **continue and scale fair trade** where it strengthens cooperatives, pairs with training and market access programs, and reduces certification barriers for the poorest producers.</p>
-  </section>
+      <footer>
+        <div class="meta">Slide 2 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 3: Wie sieht Fair Trade praktisch aus? -->
+    <section class="slide" data-notes="Ablauf: Zertifizierung, Verkauf, Prämienverwendung, Monitoring.">
+      <h2>Wie funktioniert Fair Trade praktisch?</h2>
+      <div class="card">
+        <p><strong>Typischer Ablauf:</strong></p>
+        <ol>
+          <li>Produzent*innen organisieren sich in Kooperativen oder Lieferketten.</li>
+          <li>Kooperative lässt sich zertifizieren und erfüllt Standards.</li>
+          <li>Händler zahlen Mindestpreise und Social Premium; Produkte werden mit Fair-Trade-Label verkauft.</li>
+          <li>Prämien werden für Bildung, Infrastruktur oder Produktionsverbesserung verwendet; externe Audits prüfen Einhaltung.</li>
+        </ol>
+      </div>
+
+      <footer>
+        <div class="meta">Wichtig: Fair Trade ist kein Ersatz für staatliche Entwicklungsprogramme, sondern ein ergänzender Marktmechanismus.</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 4: Vorteile -->
+    <section class="slide" data-notes="Vorteile detailliert erläutern, Beispiele nennen (Einkommen, Prämien, Governance, Umwelt).">
+      <h2>2. Vorteile von Fair Trade</h2>
+      <div class="two-col">
+        <div class="card">
+          <p><strong>Ökonomisch</strong></p>
+          <ul>
+            <li>Stabilere und oft höhere Einkommen durch Mindestpreise.</li>
+            <li>Langfristige Handelsbeziehungen und bessere Planbarkeit.</li>
+            <li>Prämien finanzieren produktive Investitionen (z. B. Lager, Verarbeitung).</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p><strong>Sozial & ökologisch</strong></p>
+          <ul>
+            <li>Soziale Prämien stärken Gemeinschaftsprojekte (Schulen, Gesundheit).</li>
+            <li>Förderung von Arbeitsrechten und Verbot von Kinderarbeit.</li>
+            <li>Anreize für umweltfreundliche Anbaumethoden und Zertifizierungsanforderungen.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="meta">Wer profitiert? Primär zertifizierte Kooperativen und deren Mitglieder; sekundär lokale Gemeinden und Konsumenten, die ethische Produkte nachfragen.</p>
+
+      <footer>
+        <div class="meta">Slide 4 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 5: Nachteile -->
+    <section class="slide" data-notes="Probleme: Kosten, Exklusion, Marktgröße, interne Verteilung, Abhängigkeit.">
+      <h2>3. Nachteile und Probleme</h2>
+      <div class="card">
+        <p><strong>Hauptkritikpunkte:</strong></p>
+        <ul>
+          <li><strong>Zertifizierungskosten & Bürokratie:</strong> Kleine Produzenten können ausgeschlossen werden.</li>
+          <li><strong>Begrenzte Nachfrage:</strong> Fair-Trade-Markt bleibt oft eine Nische; nicht alle Produkte finden Käufer.</li>
+          <li><strong>Ungleiche Verteilung:</strong> Social Premiums und Preisvorteile erreichen nicht immer alle Haushalte gleichmäßig.</li>
+          <li><strong>Abhängigkeit:</strong> Risiko, dass Kooperativen von Exportmärkten abhängig werden; Diversifizierung bleibt wichtig.</li>
+          <li><strong>Messbarkeit:</strong> Wirkungsnachweise sind heterogen; nicht alle Studien zeigen klare, langfristige Verbesserungen.</li>
+        </ul>
+      </div>
+
+      <footer>
+        <div class="meta">Slide 5 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 6: Vergleichstabelle -->
+    <section class="slide" data-notes="Tabelle kurz und prägnant: Vorteile vs. Nachteile gegenüber direkter Hilfe oder Handelsliberalisierung.">
+      <h2>Vergleich: Fair Trade vs. andere Ansätze</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Kriterium</th><th>Fair Trade</th><th>Direkte Entwicklungs‑hilfe / Marktliberalisierung</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Einkommensstabilität</td><td>+ Mindestpreise, stabiler</td><td>- Direkthilfe kurzfristig; Marktliberalisierung volatil</td></tr>
+          <tr><td>Nachhaltigkeit</td><td>+ Umweltstandards möglich</td><td>+/- abhängig von Programmen</td></tr>
+          <tr><td>Skalierbarkeit</td><td>- Nischenmarkt, begrenzt</td><td>+ Staatliche Programme skalierbar</td></tr>
+          <tr><td>Inklusion</td><td>+ für zertifizierte Gruppen</td><td>+/- abhängig von Zielgruppen</td></tr>
+        </tbody>
+      </table>
+
+      <footer>
+        <div class="meta">Slide 6 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 7: Beispiel -->
+    <section class="slide" data-notes="Konkretes Beispiel: Kaffee-Kooperative; positive Effekte und Probleme kurz darstellen.">
+      <h2>4. Beispiel: Kaffee-Kooperative in Mittelamerika</h2>
+      <div class="two-col">
+        <div class="card">
+          <p><strong>Positive Effekte:</strong></p>
+          <ul>
+            <li>Stabile Mindestpreise während Marktkrisen.</li>
+            <li>Social Premium finanzierte eine Wasseraufbereitungsanlage und Schulprojekte.</li>
+            <li>Kooperative verbesserte interne Verwaltung und Zugang zu Exportmärkten.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <p><strong>Probleme im Beispiel:</strong></p>
+          <ul>
+            <li>Einige Kleinbauern blieben außerhalb der Zertifizierung wegen Kosten.</li>
+            <li>Preisdifferenz reichte nicht immer, um Investitionen einzelner Familien zu finanzieren.</li>
+            <li>Abhängigkeit von wenigen Abnehmern erhöhte Verhandlungsschwäche.</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer>
+        <div class="meta">Slide 7 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 8: Empfehlungen -->
+    <section class="slide" data-notes="Konkrete Empfehlungen: Kombination mit Kapazitätsaufbau, Subventionen für Zertifizierung, Diversifizierung, Transparenz.">
+      <h2>5. Schlussfolgerung & Empfehlungen</h2>
+      <div class="card">
+        <p><strong>Empfehlung in Kürze:</strong> Fair Trade ist sinnvoll und nachhaltig, wenn es <em>komplementär</em> zu Kapazitätsaufbau, Marktentwicklung und gezielter Unterstützung für sehr arme Produzenten eingesetzt wird.</p>
+
+        <p><strong>Konkrete Maßnahmen:</strong></p>
+        <ul>
+          <li>Subventionen oder Starthilfen für Zertifizierungskosten besonders für die ärmsten Produzenten.</li>
+          <li>Trainings zu Governance, Buchführung und Qualitätsmanagement in Kooperativen.</li>
+          <li>Förderung von Diversifizierung (zusätzliche Einkommensquellen).</li>
+          <li>Transparente Verwendung der Social Premiums und externe Audits.</li>
+        </ul>
+      </div>
+
+      <footer>
+        <div class="meta">Slide 8 von 9</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="next()">Weiter ▶</button>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Slide 9: Abschluss & Quellenhinweis -->
+    <section class="slide" data-notes="Abschluss: kurze Zusammenfassung, Einladung zu Fragen, Hinweis auf Quellen (Studien, Fairtrade-Berichte).">
+      <h2>Abschluss</h2>
+      <p><strong>Kernaussage:</strong> Fair Trade kann Einkommen stabilisieren, Gemeinschaften stärken und nachhaltige Praktiken fördern. Es ist jedoch kein Allheilmittel — ergänzende Maßnahmen sind nötig, damit die ärmsten Produzenten nicht ausgeschlossen werden.</p>
+
+      <p class="meta">Quellenhinweis: Studien zu Fairtrade-Wirkungen, Fairtrade-Jahresberichte, Evaluationsberichte von NGOs (für eine Präsentation auf GitHub können Quellen als separate Datei ergänzt werden).</p>
+
+      <footer>
+        <div>Vielen Dank — Ende der Präsentation</div>
+        <div class="controls">
+          <button class="btn" onclick="prev()">◀ Zurück</button>
+          <button class="btn" onclick="first()">Start</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Einfaches Slide-Navigationsskript
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      let idx = 0;
+      function show(i){
+        slides.forEach((s, n) => {
+          s.style.display = (n === i) ? 'flex' : 'none';
+        });
+        idx = i;
+        // optional: update URL hash
+        history.replaceState(null, '', '#slide' + (i+1));
+      }
+      window.next = function(){
+        show(Math.min(idx+1, slides.length-1));
+      };
+      window.prev = function(){
+        show(Math.max(idx-1, 0));
+      };
+      window.first = function(){ show(0); };
+      // Keyboard navigation
+      window.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowRight' || e.key === 'PageDown') next();
+        if(e.key === 'ArrowLeft' || e.key === 'PageUp') prev();
+        if(e.key === 'Home') first();
+      });
+      // Initialize: show slide from hash if present
+      const hash = location.hash.match(/slide(\d+)/);
+      if(hash){ const n = parseInt(hash[1],10)-1; if(n>=0 && n<slides.length) idx = n; }
+      show(idx);
+    })();
+  </script>
 </body>
 </html>
