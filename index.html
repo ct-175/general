@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Jewelry – Zeitlose Eleganz</title>
+    <style>
+        /* Grundlegendes Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f0e8;
+            color: #111111;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        :root {
+            --bg-main: #f5f0e8;
+            --text-main: #111111;
+            --gold: #c89b3c;
+            --gold-light: #e4c178;
+            --dark: #111111;
+            --white: #ffffff;
+            --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --radius-card: 12px;
+            --transition-fast: 0.25s ease;
+        }
+
+        /* Layout Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(245, 240, 232, 0.98);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: width var(--transition-fast);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            height: 2px;
+            width: 100%;
+            background-color: #111111;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background: rgba(245, 240, 232, 0.98);
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.5rem 0 1.75rem;
+                max-height: 0;
+                overflow: hidden;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+                transition: max-height 0.3s ease;
+            }
+
+            nav ul.open {
+                max-height: 260px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+        }
+
+        /* Hero-Bereich */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0 5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(200, 155, 60, 0.25), transparent 55%),
+                        radial-gradient(circle at bottom right, rgba(25, 20, 10, 0.55), #111111 85%);
+            mix-blend-mode: multiply;
+            opacity: 0.85;
+        }
+
+        .hero-inner {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: center;
+            color: var(--white);
+        }
+
+        .hero-copy h1 {
+            font-size: clamp(2.4rem, 4vw, 3rem);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-copy p {
+            max-width: 30rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 2.2rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #111111;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+            filter: brightness(1.03);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            background: transparent;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: background-color var(--transition-fast), color var(--transition-fast);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .hero-media {
+            position: relative;
+            justify-self: center;
+        }
+
+        .hero-card {
+            position: relative;
+            width: min(360px, 100%);
+            border-radius: 28px;
+            padding: 1.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(17, 17, 17, 0.94));
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            box-shadow: 0 22px 40px rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-image-placeholder {
+            border-radius: 22px;
+            height: 240px;
+            background: linear-gradient(135deg, #f5f0e8 0%, #c89b3c 40%, #111111 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder::after {
+            content: "";
+            position: absolute;
+            inset: 10% 18%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-card-caption {
+            margin-top: 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #f5f0e8;
+        }
+
+        .hero-tagline {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .hero-card-price {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: -16px;
+            right: 18px;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(200, 155, 60, 0.12);
+            border: 1px solid rgba(200, 155, 60, 0.65);
+            color: #f5f0e8;
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        /* Allgemeine Sektionen */
+        main section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            max-width: 36rem;
+            margin: 0 auto;
+            font-size: 0.98rem;
+            color: #444444;
+        }
+
+        /* Kollektion / Produkte */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            height: 210px;
+            background: linear-gradient(135deg, #f0e4d4, #c89b3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .product-body {
+            padding: 1.4rem 1.6rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .product-name {
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .product-description {
+            font-size: 0.92rem;
+            color: #555555;
+        }
+
+        .product-footer {
+            margin-top: 0.65rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .product-link {
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .product-link span {
+            border-bottom: 1px solid rgba(17, 17, 17, 0.4);
+        }
+
+        /* Über uns */
+        .about {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #333333;
+        }
+
+        .about-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .about-list li::before {
+            content: "•";
+            color: var(--gold);
+            margin-right: 0.4rem;
+        }
+
+        .about-card {
+            background-color: #ffffff;
+            border-radius: 22px;
+            padding: 2rem 2rem 2.2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #777777;
+            margin-bottom: 0.35rem;
+        }
+
+        .about-highlight {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-meta {
+            font-size: 0.9rem;
+            color: #777777;
+        }
+
+        /* Kundenstimmen */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.8rem;
+        }
+
+        .testimonial-card {
+            background-color: #ffffff;
+            border-radius: var(--radius-card);
+            padding: 1.6rem 1.6rem 1.8rem;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .testimonial-text {
+            font-size: 0.95rem;
+            color: #444444;
+        }
+
+        .testimonial-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+        }
+
+        .testimonial-rating {
+            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Kontakt */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .form-row {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-row label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.35rem;
+        }
+
+        .form-row input,
+        .form-row textarea {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-size: 0.95rem;
+            outline: none;
+            background-color: #faf6ee;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+        }
+
+        .form-row textarea {
+            resize: vertical;
+            min-height: 140px;
+            border-radius: 16px;
+        }
+
+        .form-row input:focus,
+        .form-row textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 1px rgba(200, 155, 60, 0.35);
+            background-color: #ffffff;
+        }
+
+        .form-row small {
+            display: block;
+            font-size: 0.8rem;
+            color: #777777;
+            margin-top: 0.35rem;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-check input[type="checkbox"] {
+            margin-top: 0.15rem;
+        }
+
+        .contact-info {
+            font-size: 0.95rem;
+            color: #333333;
+        }
+
+        .contact-info h3 {
+            font-size: 1rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.7rem;
+        }
+
+        .contact-info strong {
+            font-weight: 600;
+        }
+
+        .contact-info .contact-block {
+            margin-bottom: 1.25rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 1.8rem 0 2rem;
+            font-size: 0.85rem;
+            background-color: #f2ebdf;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .footer-links a {
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Responsives Design */
+        @media (max-width: 992px) {
+            .hero-inner {
+                grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            }
+
+            .about,
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 3.2rem;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-copy p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-media {
+                margin-top: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-bottom: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Kopfbereich mit Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">Lumière <span>Jewelry</span></div>
+            <nav>
+                <div class="nav-toggle" aria-label="Navigation öffnen" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="#start">Start</a></li>
+                    <li><a href="#kollektion">Kollektion</a></li>
+                    <li><a href="#ueber-uns">Über uns</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero-Bereich / Start -->
+        <section id="start" class="hero">
+            <div class="container hero-inner">
+                <div class="hero-copy">
+                    <h1>Zeitlose Eleganz in jedem Detail</h1>
+                    <p>Entdecken Sie handgefertigten Schmuck aus edlen Metallen und ausgewählten Edelsteinen, der Ihre persönliche Geschichte zum Leuchten bringt.</p>
+                    <div class="hero-actions">
+                        <a href="#kollektion" class="btn-primary">Kollektion entdecken</a>
+                        <a href="#ueber-uns" class="btn-secondary">Mehr über uns</a>
+                    </div>
+                </div>
+                <div class="hero-media" aria-hidden="true">
+                    <div class="hero-card">
+                        <div class="hero-badge">Signature Collection</div>
+                        <div class="hero-image-placeholder"></div>
+                        <div class="hero-card-caption">
+                            <div>
+                                <div class="hero-tagline">Lumière Jewelry</div>
+                                <div>Feinste Handarbeit aus Berlin</div>
+                            </div>
+                            <div class="hero-card-price">ab 149 €</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kollektion / Produkte -->
+        <section id="kollektion">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kollektion</h2>
+                    <p class="section-subtitle">Eine kuratierte Auswahl zeitloser Schmuckstücke über viele Stilrichtungen hinweg – von feinen Ringen bis zu Statement-Colliers.</p>
+                </div>
+                <div class="products-grid">
+                    <article class="product-card">
+                        <div class="product-image">Ring</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Aurora Ring</h3>
+                            <p class="product-description">Feiner Goldring mit zart eingefasstem Brillanten, der das Licht bei jeder Bewegung einfängt.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 249 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">Kette</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Lumière Collier</h3>
+                            <p class="product-description">Feingliedrige Halskette mit handpolierten Elementen für einen eleganten Schimmer im Alltag.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 189 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">Armband</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Étoile Armband</h3>
+                            <p class="product-description">Feines Armband mit Sternmotiv, inspiriert vom Glanz klarer Nachthimmel.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 159 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">Ohrringe</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Velvet Drop Ohrringe</h3>
+                            <p class="product-description">Zarte Tropfenohrringe mit sanft schimmernden Steinen für einen subtilen, femininen Look.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 149 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">Ring</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Mon Coeur Ring</h3>
+                            <p class="product-description">Symbolischer Bandring, der Minimalismus mit emotionaler Bedeutung verbindet – ideal als Geschenk.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 129 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">Kette</div>
+                        <div class="product-body">
+                            <h3 class="product-name">Solstice Layering Set</h3>
+                            <p class="product-description">Mehrreihige Kettenkombination, die sich individuell tragen und kombinieren lässt.</p>
+                            <div class="product-footer">
+                                <div class="product-price">ab 219 €</div>
+                                <a href="#kontakt" class="product-link"><span>Details anfragen</span></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Über uns -->
+        <section id="ueber-uns">
+            <div class="container about">
+                <div class="about-text">
+                    <div class="section-header" style="text-align:left;margin-bottom:1.75rem;">
+                        <h2 class="section-title">Über uns</h2>
+                    </div>
+                    <p>Lumière Jewelry steht für zeitlosen Schmuck, der mit viel Liebe zum Detail in unserer Berliner Meisterwerkstatt entsteht. Jedes Stück wird von Hand gefertigt und vereint traditionelle Goldschmiedekunst mit zeitgenössischem Design.</p>
+                    <p>Wir arbeiten ausschließlich mit hochwertigen, verantwortungsvoll gewonnenen Materialien und legen Wert auf faire Produktionsbedingungen entlang der gesamten Wertschöpfungskette.</p>
+                    <ul class="about-list">
+                        <li>Handgefertigte Unikate und limitierte Kleinserien</li>
+                        <li>Verwendung von recycelten Edelmetallen und konfliktfreien Steinen</li>
+                        <li>Kostenlose Lieferung innerhalb Deutschlands ab 200 € Bestellwert</li>
+                        <li>Persönliche Beratung und individuelle Anfertigungen auf Wunsch</li>
+                    </ul>
+                </div>
+                <aside class="about-card" aria-label="Markenversprechen">
+                    <div class="about-label">Seit 2012</div>
+                    <div class="about-highlight">Schmuck, der Geschichten erzählt.</div>
+                    <div class="about-meta">Von den ersten Entwurfsskizzen bis zum letzten Polierschritt entsteht jedes Schmuckstück in sorgfältiger Handarbeit. So tragen Sie nicht nur ein Accessoire, sondern ein Stück gelebter Handwerkskunst.</div>
+                </aside>
+            </div>
+        </section>
+
+        <!-- Kundenstimmen -->
+        <section aria-label="Kundenstimmen">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Stimmen unserer Kunden</h2>
+                    <p class="section-subtitle">Menschen, die Lumière Jewelry tragen, schätzen die feinen Details, die sorgfältige Verarbeitung und das vertraute Beratungsgespräch.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">„Die Beratung im Atelier war unglaublich herzlich und kompetent. Mein Verlobungsring ist genau so geworden, wie ich ihn mir erhofft habe.“</p>
+                        <div class="testimonial-footer">
+                            <span class="testimonial-name">Anna K.</span>
+                            <span class="testimonial-rating">★★★★★</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">„Feine, unaufdringliche Designs, die ich problemlos im Alltag und zu besonderen Anlässen tragen kann. Die Qualität überzeugt mich jedes Mal aufs Neue.“</p>
+                        <div class="testimonial-footer">
+                            <span class="testimonial-name">Michael S.</span>
+                            <span class="testimonial-rating">★★★★★</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card">
+                        <p class="testimonial-text">„Ich liebe, dass recycelte Materialien verwendet werden, ohne Kompromisse beim Design zu machen. Nachhaltigkeit kann so schön sein.“</p>
+                        <div class="testimonial-footer">
+                            <span class="testimonial-name">Laura P.</span>
+                            <span class="testimonial-rating">★★★★★</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontakt -->
+        <section id="kontakt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kontakt</h2>
+                    <p class="section-subtitle">Sie haben Fragen zu einem Schmuckstück, wünschen sich eine individuelle Anfertigung oder möchten einen Beratungstermin vereinbaren? Schreiben Sie uns gern.</p>
+                </div>
+                <div class="contact-layout">
+                    <div class="contact-form" aria-label="Kontaktformular (Demo)">
+                        <div class="form-row">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Ihr Name">
+                        </div>
+                        <div class="form-row">
+                            <label for="email">E-Mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="ihre@emailadresse.de">
+                        </div>
+                        <div class="form-row">
+                            <label for="nachricht">Nachricht *</label>
+                            <textarea id="nachricht" name="nachricht" required placeholder="Wie können wir Ihnen weiterhelfen?"></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="datenschutz" name="datenschutz" required>
+                            <label for="datenschutz">Ich habe die Datenschutzhinweise zur Kenntnis genommen und bin mit der Verarbeitung meiner Angaben im Rahmen dieser Anfrage einverstanden.</label>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Nachricht senden</button>
+                            <small>Hinweis: Dieses Formular dient nur zu Demonstrationszwecken und hat keine echte Sende-Funktion.</small>
+                        </div>
+                    </div>
+
+                    <aside class="contact-info" aria-label="Kontaktinformationen">
+                        <div class="contact-block">
+                            <h3>Atelier &amp; Showroom</h3>
+                            <p>Lumière Jewelry<br>Beispielstraße 12<br>10115 Berlin</p>
+                        </div>
+                        <div class="contact-block">
+                            <p><strong>Telefon:</strong> +49 (0)30 123 45 678</p>
+                            <p><strong>E-Mail:</strong> hello@lumiere-jewelry.de</p>
+                        </div>
+                        <div class="contact-block">
+                            <p><strong>Öffnungszeiten:</strong><br>
+                                Montag – Freitag: 11:00 – 19:00 Uhr<br>
+                                Samstag: 11:00 – 16:00 Uhr<br>
+                                Sonntag: geschlossen
+                            </p>
+                        </div>
+                        <div class="contact-block">
+                            <p>Besuchen Sie uns im Atelier, probieren Sie Ihre Lieblingsstücke in Ruhe an und lassen Sie sich individuell beraten.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-inner">
+            <div>
+                &copy; 2026 Lumière Jewelry. Alle Rechte vorbehalten.
+            </div>
+            <div class="footer-links">
+                <a href="#" aria-label="Impressum">Impressum</a>
+                <a href="#" aria-label="Datenschutz">Datenschutz</a>
+                <a href="#" aria-label="Instagram">Instagram · in</a>
+                <a href="#" aria-label="Pinterest">Pinterest · p</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Kleines Skript für das mobile Menü -->
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navList = document.querySelector('nav ul');
+
+        if (navToggle && navList) {
+            navToggle.addEventListener('click', function () {
+                const isOpen = navList.classList.toggle('open');
+                navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+        }
+    </script>
+</body>
+</html>
