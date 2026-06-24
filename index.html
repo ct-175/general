@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI im Vertrieb</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0b0c;
+            --text-main: #f5f5f7;
+            --text-muted: #86868b;
+            --accent: #d4af37; /* Ein sehr dezentes, mattes Gold für edle Akzente */
+            --border: rgba(255, 255, 255, 0.08);
+            --transition-speed: 0.6s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Präsentations-Rahmen */
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Einzelne Folie */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed) cubic-bezier(0.25, 1, 0.5, 1),
+                        visibility var(--transition-speed);
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        /* Typografie & Layouts */
+        .slide-content {
+            max-width: 1000px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .center {
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            font-weight: 500;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        p.lead {
+            font-size: 1.75rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--text-muted);
+            max-width: 800px;
+        }
+
+        p.lead strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Grid / Spalten (Ultra-minimalistisch ohne klobige Boxen) */
+        .grid-minimal {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+
+        .grid-item h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .grid-item p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* Große Zahlen-Folie */
+        .stats-display {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .huge-number {
+            font-size: 9rem;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            color: var(--text-main);
+        }
+
+        /* Zitat-Folie */
+        blockquote {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+
+        cite {
+            font-style: normal;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+        }
+
+        /* Elegante, minimalistische Controls */
+        .nav-controls {
+            position: absolute;
+            bottom: 3rem;
+            right: 4rem;
+            display: flex;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Fortschrittsanzeige (Dünne Linie ganz oben) */
+        .progress-bar-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--text-main);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Tastatur-Hinweis */
+        .keyboard-hint {
+            position: absolute;
+            bottom: 3.5rem;
+            left: 4rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="presentation-container">
+        
+        <div class="slide active">
+            <div class="slide-content center">
+                <h2>Präsentation</h2>
+                <h1>KI im <span>Vertrieb</span></h1>
+                <p class="lead">Die Zukunft des Verkaufens: Wie künstliche Intelligenz Prozesse automatisiert, Ergebnisse steigert und Rollen neu definiert.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Die neue Ära</h2>
+                <h1>Vom Bauchgefühl zur präzisen Datenwissenschaft.</h1>
+                <p class="lead">Der traditionelle Vertrieb verlässt sich oft auf starre Listen und Intuition. Moderne Organisationen nutzen KI, um Verhaltenssignale in Echtzeit zu interpretieren und Abschlüsse proaktiv vorherzusagen.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Der Impact</h2>
+                <div class="stats-display">
+                    <div class="huge-number">3.7x</div>
+                    <p class="lead" style="margin-bottom: 0;">höhere Wahrscheinlichkeit zur <strong>Quotenerfüllung</strong> für Teams, die datengesteuerte KI-Tools einsetzen.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Automatisierung</h2>
+                <h1>Was KI heute übernimmt.</h1>
+                <div class="grid-minimal">
+                    <div class="grid-item">
+                        <h3>CRM Updates</h3>
+                        <p>Nahtlose und automatische Erfassung von Kundeninteraktionen, E-Mails und Gesprächsnotizen ohne manuellen Aufwand.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Hyper-Outreach</h3>
+                        <p>Generierung maßgeschneiderter, hochgradig personalisierter Erstansprachen basierend auf LinkedIn- und Trigger-Daten.</p>
+                    </div>
+                    <div class="grid-item">
+                        <h3>Forecasting</h3>
+                        <p>Präzise und verlässliche Umsatzprognosen durch die kontinuierliche Analyse historischer und aktueller Deal-Aktivitäten.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="slide-content center">
+                <h2>Fazit</h2>
+                <blockquote>
+                    „KI wird den Verkäufer nicht ersetzen. Aber der Verkäufer, der KI nutzt, wird den ersetzen, der sie nicht nutzt.“
+                </blockquote>
+                <cite>Zukunft des Vertriebs</cite>
+            </div>
+        </div>
+
+        <div class="keyboard-hint">Pfeiltasten oder Leertaste nutzen</div>
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" aria-label="Vorherige Folie">←</button>
+            <button class="nav-btn" id="nextBtn" aria-label="Nächste Folie">→</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const progressBar = document.getElementById('progressBar');
+        let currentSlideIndex = 0;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlideIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            const progress = (currentSlideIndex / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlides();
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        updateSlides();
+    </script>
+</body>
+</html>
